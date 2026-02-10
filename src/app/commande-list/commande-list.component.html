@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>Gestion des Commandes</h2>
+
+  @if (authService.getRole() === 'ADMIN') {
+
+  <button (click)="router.navigate(['/commandes/ajouter'])" class="btn-add" style="margin-bottom: 15px;">
+    + Nouvelle Commande
+  </button>
+
+}
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Produit</th>
+        <th>quantité</th>
+        <th>Client</th>
+        <th>Actions</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      @for (cmd of commandes; track cmd.id) {
+        <tr>
+          <td>{{ cmd.id }}</td>
+          <td>{{ cmd.produit }}</td>
+          <td>{{ cmd.quantite }}</td>
+          <td>{{ cmd.client.nom }}</td>
+           <td>
+            @if (authService.isAdmin()) {
+              <button (click)="supprimer(cmd.id!)" class="btn-delete">Supprimer</button>
+               <button (click)="router.navigate(['/commandes/modifier', cmd.id])" class="btn-edit">Modifier</button>
+            }
+
+
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 20px;">
+            Aucune commande enregistrée.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

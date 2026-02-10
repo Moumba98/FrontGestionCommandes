@@ -1,0 +1,111 @@
+/* Barre de navigation */
+.navbar {
+  background-color: #3f51b5; /* Le bleu de ton image */
+  padding: 0 20px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; /* Pousse le logo à gauche et les liens à droite */
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Espacement des liens */
+.nav-links {
+  display: flex;
+  gap: 20px; /* Ajoute de l'espace entre CHAQUE lien automatiquement */
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Style pour le lien actif */
+.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid white;
+}
+
+/* Bouton Déconnexion */
+.btn-logout {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-logout:hover {
+  background-color: #d32f2f;
+}
+
+/* Badge Admin spécial */
+.admin-badge {
+  border: 1px solid #ffeb3b !important;
+  color: #ffeb3b !important;
+}
+
+/* Conteneur pour le reste de la page */
+.main-content {
+  padding: 20px;
+}
+
+/* Style de base du badge */
+.user-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 10px;
+  border: 2px solid transparent;
+}
+
+/* Style si c'est un ADMIN */
+.is-admin {
+  background-color: #ffeb3b; /* Jaune */
+  color: #333;
+  border-color: #fbc02d;
+}
+
+/* Style si c'est un USER */
+.is-user {
+  background-color: #e3f2fd; /* Bleu très clair */
+  color: #1976d2;
+  border-color: #2196f3;
+}
+
+/* On ajuste un peu les nav-links pour que tout s'aligne bien */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+

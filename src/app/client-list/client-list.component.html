@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Gestion des Clients</h2>
+
+
+  @if (authService.getRole() === 'ADMIN') {
+
+      <button  [routerLink]="['/clients/ajouter']"> + Ajouter </button>
+  }
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of clients; track c.id) {
+        <tr>
+          <td>{{ c.id }}</td>
+          <td>{{ c.nom }}</td>
+          <td>{{ c.email }}</td>
+          <td>
+
+
+            @if (authService.isAdmin()) {
+               <button class="btn-edit" [routerLink]="['/clients/modifier', c.id]"> Modifier </button>
+              <button class="btn-delete" (click)="supprimer(c.id)">Supprimer</button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" style="text-align: center;">Aucun client trouvé.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

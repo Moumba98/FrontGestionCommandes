@@ -1,0 +1,23 @@
+<div class="container" style="margin: 20px;">
+  <h2>
+    @if (isEditMode) { Modifier le client {{ client.nom }} }
+    @else { Ajouter un nouveau client }
+  </h2>
+
+  <form (ngSubmit)="enregistrer()">
+    <div style="margin-bottom: 10px;">
+      <label>Nom :</label><br>
+      <input type="text" [(ngModel)]="client.nom" name="nom" required>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <label>Email :</label><br>
+      <input type="email" [(ngModel)]="client.email" name="email" required>
+    </div>
+
+    <button type="submit" class="btn-save">
+      @if (isEditMode) { Mettre à jour } @else { Créer }
+    </button>
+    <button type="button" (click)="this.router.navigate(['/clients'])">Annuler</button>
+  </form>
+</div>
