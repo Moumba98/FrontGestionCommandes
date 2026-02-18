@@ -6,6 +6,9 @@
       @if (authService.isLoggedIn()) {
         <a routerLink="/commandes" routerLinkActive="active">Commandes</a>
         <a routerLink="/clients" routerLinkActive="active">Clients</a>
+        <a routerLink="/panier" class="cart-link">
+  🛒 Panier ({{ cartService.getItems().length }})
+   </a>
 
         @if (authService.getRole() === 'ADMIN') {
 
@@ -27,5 +30,6 @@
 <div class="main-content">
   <router-outlet></router-outlet>
 </div>
+
 
 

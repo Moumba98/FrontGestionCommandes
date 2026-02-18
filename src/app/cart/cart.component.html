@@ -1,0 +1,34 @@
+<div class="cart-container">
+  <h2>Mon Panier 🛒</h2>
+
+  @if (items.length > 0) {
+    <div class="cart-list">
+      @for (item of items; track $index) {
+        <div class="cart-item">
+          <div class="item-info">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="mini-img">
+            <span>{{ item.name }}</span>
+          </div>
+          <span class="item-price">{{ item.price }} €</span>
+        </div>
+      }
+    </div>
+
+    <hr>
+
+    <div class="cart-summary">
+      <h3>Total : <span class="total-amount">{{ cartService.getTotalPrice() }} €</span></h3>
+
+      <div class="cart-actions">
+        <button class="btn-order">Valider la commande</button>
+        <button class="btn-clear" (click)="cartService.clearCart(); items = []">Vider le panier</button>
+      </div>
+    </div>
+  }
+  @else {
+    <div class="empty-cart">
+      <p>Votre panier est vide pour le moment.</p>
+      <button routerLink="/boutique" class="btn-back">Retour à la boutique</button>
+    </div>
+  }
+</div>
