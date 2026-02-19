@@ -1,0 +1,15 @@
+<div class="product-container">
+  @for (product of products; track product.id) {
+    <div class="product-card">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-img">
+
+      <h3>{{ product.name }}</h3>
+      <p class="price">{{ product.price }} €</p>
+      <p>{{ product.description }}</p>
+
+      @if (authService.isLoggedIn()) {
+        <button class="btn-add" (click)="addToCart(product)">Ajouter au panier</button>
+      }
+    </div>
+  }
+</div>
