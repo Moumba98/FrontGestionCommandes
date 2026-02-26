@@ -1,35 +1,40 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo" routerLink="/">MaGestion</div>
+<mat-toolbar color="primary" class="main-navbar">
+  <span class="logo" routerLink="/">MaGestion</span>
 
-    <div class="nav-links">
-      @if (authService.isLoggedIn()) {
-        <a routerLink="/commandes" routerLinkActive="active">Commandes</a>
-        <a routerLink="/clients" routerLinkActive="active">Clients</a>
-        <a routerLink="/panier" class="cart-link">
-  🛒 Panier ({{ cartService.getItems().length }})
-   </a>
+  <span class="spacer"></span>
 
-        @if (authService.getRole() === 'ADMIN') {
+  <div class="nav-links">
+    @if (authService.getRole() === 'ADMIN') {
+      <button mat-button routerLink="/clients" routerLinkActive="active-link">Clients</button>
+      <button mat-button routerLink="/utilisateurs" routerLinkActive="active-link">Utilisateurs</button>
+    }
 
-          <a routerLink="/utilisateurs" routerLinkActive="active">Gestion des utilisateurs</a>
-        }
-        <span [class]="'user-badge ' + (authService.getRole() === 'ADMIN' ? 'is-admin' : 'is-user')">
-          {{ authService.getRole() }}
-        </span>
-        <button (click)="authService.logout()" class="btn-logout">Déconnexion</button>
-      }
-      @else {
-        <a routerLink="/login" routerLinkActive="active">Connexion</a>
-        <a routerLink="/register" routerLinkActive="active">Créer un compte</a>
-      }
-    </div>
+    @if (authService.isLoggedIn()) {
+      <button mat-button routerLink="/commandes" routerLinkActive="active-link">Commandes</button>
+
+      <button mat-icon-button routerLink="/panier" class="cart-btn">
+        <mat-icon [matBadge]="cartService.getItems().length"
+                  matBadgeColor="warn"
+                  [matBadgeHidden]="cartService.getItems().length === 0">
+          shopping_cart
+        </mat-icon>
+      </button>
+
+      <span class="role-chip" [ngClass]="authService.getRole() === 'ADMIN' ? 'admin-chip' : 'user-chip'">
+        {{ authService.getRole() }}
+      </span>
+
+      <button mat-stroked-button color="warn" (click)="authService.logout()" class="logout-btn">
+        <mat-icon>logout</mat-icon> Déconnexion
+      </button>
+    }
+    @else {
+      <button mat-button routerLink="/login">Connexion</button>
+      <button mat-raised-button color="accent" routerLink="/register">Créer un compte</button>
+    }
   </div>
-</nav>
+</mat-toolbar>
 
-<div class="main-content">
+<div class="container-outlet">
   <router-outlet></router-outlet>
 </div>
-
-
-

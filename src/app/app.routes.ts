@@ -12,10 +12,10 @@ import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
 
- { path: 'login', component: LoginComponent },
- { path: 'register', component: RegisterComponent },
- { path: 'clients', component: ClientListComponent },
- { path: 'clients/ajouter', component: ClientFormComponent }, // URL : /clients/ajouter
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'clients', component: ClientListComponent },
+  { path: 'clients/ajouter', component: ClientFormComponent }, // URL : /clients/ajouter
   { path: 'clients/modifier/:id', component: ClientFormComponent }, // URL : /clients/modifier/1
   { path: 'boutique', component: ProductListComponent },
   { path: 'panier', component: CartComponent },
