@@ -20,7 +20,7 @@ export class LoginComponent {
 
   onLogin() {
     this.authService.login(this.credentials).subscribe({
-      next: () => this.router.navigate(['/clients']),
+      next: () => this.router.navigate(['/boutique']), // Redirige vers la boutique après connexion
       error: () => this.errorMessage = "Identifiants incorrects"
     });
     console.log("Objet envoyé au Backend :", JSON.stringify(this.credentials));
