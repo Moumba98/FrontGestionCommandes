@@ -13,6 +13,8 @@ import { ProductService } from '../sevices/product.service';
 import { CartService } from '../sevices/cart.service';
 import { AuthService } from '../sevices/auth.service';
 import { Product } from '../models/product';
+import { RouterLink } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
@@ -25,7 +27,8 @@ import { Product } from '../models/product';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatBadgeModule
+    MatBadgeModule,
+    RouterLink
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
@@ -38,8 +41,10 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     public authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    private sanitizer: DomSanitizer
   ) {}
+
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -50,6 +55,10 @@ export class ProductListComponent implements OnInit {
       error: (err) => console.error("Erreur", err)
     });
   }
+
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
   filterProducts(): void {
     this.filteredProducts = this.products.filter(p =>
@@ -65,4 +74,10 @@ export class ProductListComponent implements OnInit {
     const item = this.cartService.getItems().find(i => i.id === product.id);
     return item ? (item.quantity || 0) : 0;
   }
+
+   getProductById(id: number) {
+      // On ajoute /id à la fin de l'URL de base
+      this.productService.getProductById
+    }
+
 }

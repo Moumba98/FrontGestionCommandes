@@ -1,40 +1,39 @@
 <div class="container">
-  <h2>Gestion des Clients</h2>
+  <h2>Gestion des Utilisateurs</h2>
 
-
-  @if (authService.getRole() === 'ADMIN') {
-
-      <button  [routerLink]="['/clients/ajouter']"> + Ajouter </button>
+  @if (authService.isAdmin()) {
+    <button [routerLink]="['/register']"> + Créer un utilisateur </button>
   }
-
 
   <table>
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nom</th>
-        <th>Email</th>
+        <th>Utilisateur (Email)</th>
+        <th>Rôle</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      @for (c of clients; track c.id) {
+      @for (u of users; track u.id) {
         <tr>
-          <td>{{ c.id }}</td>
-          <td>{{ c.nom }}</td>
-          <td>{{ c.email }}</td>
+          <td>{{ u.id }}</td>
+          <td>{{ u.username }}</td> <td>
+            <span [class]="u.role === 'ADMIN' ? 'text-danger fw-bold' : ''">
+              {{ u.role }}
+            </span>
+          </td>
           <td>
-
-
             @if (authService.isAdmin()) {
-               <button class="btn-edit" [routerLink]="['/clients/modifier', c.id]"> Modifier </button>
-              <button class="btn-delete" (click)="supprimer(c.id)">Supprimer</button>
+
+
+             <button class="btn-delete" (click)="supprimer(u.id!)">Supprimer</button>
             }
           </td>
         </tr>
       } @empty {
         <tr>
-          <td colspan="4" style="text-align: center;">Aucun client trouvé.</td>
+          <td colspan="4" style="text-align: center;">Aucun utilisateur trouvé.</td>
         </tr>
       }
     </tbody>

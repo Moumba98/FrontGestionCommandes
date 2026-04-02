@@ -1,0 +1,26 @@
+@if (product) {
+  <div class="detail-container">
+    <div class="image-section">
+      <img [src]="product.imageUrl" [alt]="product.name">
+    </div>
+
+    <div class="info-section">
+      <h1>{{ product.name }}</h1>
+      <p class="category">{{ product.category }}</p>
+      <p class="description">{{ product.description }}</p>
+      <h2 class="price">{{ product.price }} €</h2>
+
+      <p [style.color]="product.stockQuantity > 0 ? 'green' : 'red'">
+        {{ product.stockQuantity > 0 ? 'En stock' : 'Rupture de stock' }}
+      </p>
+
+      <button mat-raised-button color="primary"
+              (click)="addToCart(product)"
+              [disabled]="product.stockQuantity === 0">
+        Ajouter au panier
+      </button>
+    </div>
+  </div>
+} @else {
+  <p>Chargement du produit...</p>
+}

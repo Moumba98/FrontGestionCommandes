@@ -1,10 +1,10 @@
 <div class="container">
-  <h2 class="form-title">Ajouter une commande</h2>
+  <h2 class="form-title">{{ modeEdition ? 'Modifier la commande' : 'Ajouter une commande' }}</h2>
 
   <form (ngSubmit)="enregistrer()">
     <div class="form-group">
-      <label for="produit">Produit :</label>
-      <input type="text" id="produit" [(ngModel)]="commande.produit" name="produit" required placeholder="Nom de l'article">
+      <label for="product">ID du Produit :</label>
+      <input type="number" id="product" [(ngModel)]="commande.product.id" name="productId" required placeholder="Ex: 1">
     </div>
 
     <div class="form-group">
@@ -13,18 +13,18 @@
     </div>
 
     <div class="form-group">
-      <label for="client">Attribuer à un client :</label>
-      <select id="client" [(ngModel)]="commande.client.id" name="clientId" required>
-        <option [value]="0" disabled>-- Choisir un client --</option>
-        @for (c of clients; track c.id) {
-          <option [value]="c.id">{{ c.nom }}</option>
+      <label for="user">Attribuer à un utilisateur (client) :</label>
+      <select id="user" [(ngModel)]="commande.user.id" name="clientId" required>
+        <option [value]="0" disabled>-- Choisir un utilisateur --</option>
+        @for (u of users; track u.id) {
+          <option [value]="u.id">{{ u.username }}</option>
         }
       </select>
     </div>
 
     <div class="actions">
-      <button type="submit" class="btn-save" [disabled]="commande.client.id === 0">
-        Créer la commande
+      <button type="submit" class="btn-save" [disabled]="commande.user.id === 0">
+        {{ modeEdition ? 'Enregistrer les modifications' : 'Créer la commande' }}
       </button>
       <button type="button" (click)="router.navigate(['/commandes'])" class="btn-cancel">
         Annuler

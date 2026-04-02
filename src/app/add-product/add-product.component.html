@@ -1,0 +1,49 @@
+<div class="product-container">
+  <h2>Ajouter un Produit</h2>
+
+  <form (ngSubmit)="onAddProduct()" #productForm="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom du produit</mat-label>
+      <input matInput [(ngModel)]="newProduct.name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="newProduct.description" name="description" required></textarea>
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Prix (€)</mat-label>
+        <input matInput type="number" [(ngModel)]="newProduct.price" name="price" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Stock</mat-label>
+        <input matInput type="number" [(ngModel)]="newProduct.stockQuantity" name="stockQuantity" required>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>URL de l'image</mat-label>
+      <input matInput [(ngModel)]="newProduct.imageUrl" name="imageUrl" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Catégorie</mat-label>
+      <mat-select [(ngModel)]="newProduct.category" name="category" required>
+        <mat-option value="Electronique">Électronique</mat-option>
+        <mat-option value="Mode">Mode</mat-option>
+        <mat-option value="Maison">Maison</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" [disabled]="!productForm.form.valid">
+      Enregistrer le Produit
+    </button>
+  </form>
+
+  @if (successMessage) {
+    <p class="success-msg">{{ successMessage }}</p>
+  }
+</div>
