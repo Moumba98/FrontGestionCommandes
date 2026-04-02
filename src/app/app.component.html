@@ -4,10 +4,11 @@
   <span class="spacer"></span>
 
   <div class="nav-links">
-    @if (authService.getRole() === 'ADMIN') {
-      <button mat-button routerLink="/clients" routerLinkActive="active-link">Clients</button>
-      <button mat-button routerLink="/utilisateurs" routerLinkActive="active-link">Utilisateurs</button>
-    }
+  @if (authService.getRole() === 'ADMIN') {
+  <button mat-button routerLink="/ajouter" routerLinkActive="active-link">AjouterProduit</button>
+  <button mat-button routerLink="/clients" routerLinkActive="active-link">Clients</button>
+  <button mat-button routerLink="/utilisateurs" routerLinkActive="active-link">Utilisateurs</button>
+}
 
     @if (authService.isLoggedIn()) {
       <button mat-button routerLink="/commandes" routerLinkActive="active-link">Commandes</button>
@@ -37,4 +38,6 @@
 
 <div class="container-outlet">
   <router-outlet></router-outlet>
+
 </div>
+

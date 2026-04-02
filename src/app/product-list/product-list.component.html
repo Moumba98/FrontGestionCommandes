@@ -11,12 +11,14 @@
   <div class="product-grid">
     @for (product of filteredProducts; track product.id) {
       <div class="custom-product-card">
+
         @if (getQuantity(product) > 0) {
           <div class="floating-badge">{{ getQuantity(product) }}</div>
         }
 
-        <div class="image-container">
-          <img [src]="product.imageUrl" [alt]="product.name">
+        <div class="image-container" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+         <img [src]="getSafeUrl(product.imageUrl)" [alt]="product.name">
+
           <div class="overlay">
              <button mat-mini-fab color="white" (click)="addToCart(product)" class="quick-add">
                 <mat-icon>add_shopping_cart</mat-icon>
@@ -26,7 +28,11 @@
 
         <div class="product-info">
           <span class="category">Premium Collection</span>
-          <h3>{{ product.name }}</h3>
+
+          <h3 [routerLink]="['/product', product.id]" style="cursor: pointer;">
+            {{ product.name }}
+          </h3>
+
           <div class="footer-card">
             <span class="price">{{ product.price | number:'1.2-2' }} €</span>
 

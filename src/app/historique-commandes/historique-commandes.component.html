@@ -1,0 +1,51 @@
+
+<div class="container mt-5">
+  <h2 class="mb-4">Mon Historique d'Achats</h2>
+
+  @if (chargement) {
+    <div class="text-center">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Chargement de vos commandes...</p>
+    </div>
+  } @else {
+
+    @if (mesCommandes.length > 0) {
+      <div class="card shadow">
+        <div class="card-body">
+          <table class="table table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Date</th>
+                <th>Référence</th>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (cmd of mesCommandes; track cmd.id) {
+                <tr>
+                  <td>{{ cmd.dateCommande | date:'dd/MM/yyyy' }}</td>
+                  <td><code class="fw-bold">{{ cmd.reference }}</code></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img [src]="cmd.product.imageUrl" class="rounded me-2" style="width: 40px;">
+                      {{ cmd.product.name }}
+                    </div>
+                  </td>
+                  <td>{{ cmd.quantite }}</td>
+                  <td class="fw-bold">{{ (cmd.quantite * cmd.prixUnitaire) | currency:'EUR' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    } @else {
+      <div class="alert alert-info">
+        Vous n'avez pas encore passé de commande.
+      </div>
+    }
+
+  }
+</div>
