@@ -2,45 +2,49 @@
   <h2>Gestion des Commandes</h2>
 
   @if (authService.getRole() === 'ADMIN') {
-
-  <button (click)="router.navigate(['/commandes/ajouter'])" class="btn-add" style="margin-bottom: 15px;">
-    + Nouvelle Commande
-  </button>
-
-}
+    <button (click)="router.navigate(['/commandes/ajouter'])" class="btn-add" style="margin-bottom: 15px;">
+      + Nouvelle Commande (Manuel)
+    </button>
+  }
 
   <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>Produit</th>
-        <th>quantité</th>
-        <th>Client</th>
+        <th>Quantité</th>
+        @if (authService.getRole() === 'ADMIN') {
+          <th>Client</th>
+        }
+        <th>Date</th>
         <th>Actions</th>
-
-
       </tr>
     </thead>
     <tbody>
       @for (cmd of commandes; track cmd.id) {
         <tr>
           <td>{{ cmd.id }}</td>
-          <td>{{ cmd.produit }}</td>
-          <td>{{ cmd.quantite }}</td>
-          <td>{{ cmd.client.nom }}</td>
-           <td>
+          <td>{{ cmd.product.name }}</td> <td>{{ cmd.quantite }}</td>
+
+          @if (authService.getRole() === 'ADMIN') {
+            <td>{{ cmd.user.username }}</td>
+          }
+
+          <td>{{ cmd.dateCommande | date:'dd/MM/yyyy HH:mm' }}</td>
+
+          <td>
             @if (authService.isAdmin()) {
               <button (click)="supprimer(cmd.id!)" class="btn-delete">Supprimer</button>
-               <button (click)="router.navigate(['/commandes/modifier', cmd.id])" class="btn-edit">Modifier</button>
+              <button (click)="router.navigate(['/commandes/modifier', cmd.id])" class="btn-edit">Modifier</button>
+            } @else {
+              <span class="status-badge">Validée</span>
             }
-
-
           </td>
         </tr>
       } @empty {
         <tr>
-          <td colspan="5" style="text-align: center; padding: 20px;">
-            Aucune commande enregistrée.
+          <td [attr.colspan]="authService.getRole() === 'ADMIN' ? 6 : 5" style="text-align: center; padding: 20px;">
+            Aucune commande enregistrée dans votre historique.
           </td>
         </tr>
       }

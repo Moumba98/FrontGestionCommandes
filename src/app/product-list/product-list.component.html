@@ -1,0 +1,49 @@
+<div class="main-container">
+  <div class="search-header">
+    <h1>Découvrez nos produits</h1>
+    <mat-form-field appearance="outline" class="modern-search">
+      <mat-label>Rechercher un article...</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (input)="filterProducts()">
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="product-grid">
+    @for (product of filteredProducts; track product.id) {
+      <div class="custom-product-card">
+
+        @if (getQuantity(product) > 0) {
+          <div class="floating-badge">{{ getQuantity(product) }}</div>
+        }
+
+        <div class="image-container" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+         <img [src]="getSafeUrl(product.imageUrl)" [alt]="product.name">
+
+          <div class="overlay">
+             <button mat-mini-fab color="white" (click)="addToCart(product)" class="quick-add">
+                <mat-icon>add_shopping_cart</mat-icon>
+             </button>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <span class="category">Premium Collection</span>
+
+          <h3 [routerLink]="['/product', product.id]" style="cursor: pointer;">
+            {{ product.name }}
+          </h3>
+
+          <div class="footer-card">
+            <span class="price">{{ product.price | number:'1.2-2' }} €</span>
+
+            @if (authService.isLoggedIn()) {
+              <button mat-flat-button class="btn-buy" (click)="addToCart(product)">
+                {{ getQuantity(product) > 0 ? 'Ajouter encore' : 'Ajouter au panier' }}
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

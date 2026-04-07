@@ -1,18 +1,28 @@
 <div class="container" style="margin: 20px;">
   <h2>
-    @if (isEditMode) { Modifier le client {{ client.nom }} }
-    @else { Ajouter un nouveau client }
+    @if (isEditMode) { Modifier l'utilisateur {{ client.username }} }
+    @else { Ajouter un nouvel utilisateur }
   </h2>
 
   <form (ngSubmit)="enregistrer()">
     <div style="margin-bottom: 10px;">
-      <label>Nom :</label><br>
-      <input type="text" [(ngModel)]="client.nom" name="nom" required>
+      <label>Nom d'utilisateur (Email) :</label><br>
+      <input type="text" [(ngModel)]="client.username" name="username" required>
     </div>
 
+    @if (!isEditMode) {
+      <div style="margin-bottom: 10px;">
+        <label>Mot de passe :</label><br>
+        <input type="password" [(ngModel)]="client.password" name="password" required>
+      </div>
+    }
+
     <div style="margin-bottom: 10px;">
-      <label>Email :</label><br>
-      <input type="email" [(ngModel)]="client.email" name="email" required>
+      <label>Rôle :</label><br>
+      <select [(ngModel)]="client.role" name="role">
+        <option value="USER">Utilisateur</option>
+        <option value="ADMIN">Administrateur</option>
+      </select>
     </div>
 
     <button type="submit" class="btn-save">

@@ -1,111 +1,81 @@
-/* Barre de navigation */
-.navbar {
-  background-color: #3f51b5; /* Le bleu de ton image */
-  padding: 0 20px;
-  height: 64px;
+.main-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white !important;
+  color: #2d3436 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  height: 70px;
   display: flex;
   align-items: center;
-  color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.nav-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between; /* Pousse le logo à gauche et les liens à droite */
-  align-items: center;
+  padding: 0 5%;
 }
 
 .logo {
+  font-weight: 900;
   font-size: 1.5rem;
-  font-weight: bold;
+  letter-spacing: -1px;
   cursor: pointer;
+  background: linear-gradient(45deg, #3f51b5, #ff4081);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Espacement des liens */
+.spacer {
+  flex: 1 1 auto;
+}
+
 .nav-links {
   display: flex;
-  gap: 20px; /* Ajoute de l'espace entre CHAQUE lien automatiquement */
   align-items: center;
+  gap: 10px;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background 0.3s;
-}
-
-.nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Style pour le lien actif */
-.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-bottom: 2px solid white;
-}
-
-/* Bouton Déconnexion */
-.btn-logout {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-logout:hover {
-  background-color: #d32f2f;
-}
-
-/* Badge Admin spécial */
-.admin-badge {
-  border: 1px solid #ffeb3b !important;
-  color: #ffeb3b !important;
-}
-
-/* Conteneur pour le reste de la page */
-.main-content {
-  padding: 20px;
-}
-
-/* Style de base du badge */
-.user-badge {
+/* Style du badge de rôle */
+.role-chip {
   padding: 4px 12px;
   border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 0 10px;
   text-transform: uppercase;
+}
+
+.admin-chip {
+  background-color: #ffeaa7;
+  color: #d63031;
+}
+
+.user-chip {
+  background-color: #dfe6e9;
+  color: #636e72;
+}
+
+/* Lien Actif */
+.active-link {
+  color: #3f51b5 !important;
+  border-bottom: 2px solid #3f51b5;
+  border-radius: 0 !important;
+}
+
+.logout-btn {
   margin-left: 10px;
-  border: 2px solid transparent;
+  border-radius: 10px !important;
 }
 
-/* Style si c'est un ADMIN */
-.is-admin {
-  background-color: #ffeb3b; /* Jaune */
-  color: #333;
-  border-color: #fbc02d;
+.cart-btn {
+  margin-right: 15px;
 }
 
-/* Style si c'est un USER */
-.is-user {
-  background-color: #e3f2fd; /* Bleu très clair */
-  color: #1976d2;
-  border-color: #2196f3;
+.container-outlet {
+  padding-top: 20px;
 }
 
-/* On ajuste un peu les nav-links pour que tout s'aligne bien */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.main-navbar button {
+  color: #2d3436 !important; /* Force le texte en gris foncé/noir */
 }
 
-
+.active-link {
+  color: #3f51b5 !important; /* Couleur bleue pour le lien actif */
+  font-weight: bold;
+}

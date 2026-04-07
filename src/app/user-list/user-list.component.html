@@ -26,7 +26,7 @@
             <div class="action-group">
               <button class="btn-edit" (click)="changerRole(user.username, 'ADMIN')">Mettre ADMIN</button>
               <button class="btn-orange" (click)="changerRole(user.username, 'USER')">Mettre USER</button>
-              <button class="btn-delete" (click)="supprimerUtilisateur(user.id)">Supprimer</button>
+              <button class="btn-delete" (click)="supprimerUtilisateur(user.id!)">Supprimer</button>
             </div>
           </td>
         </tr>

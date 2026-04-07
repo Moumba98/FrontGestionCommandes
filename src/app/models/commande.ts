@@ -1,14 +1,14 @@
-import { Client } from "./clients";
+import { Product } from './product';
+import { User } from './user';
 
 export interface Commande {
-  id?: number;
-  produit: string;
+  id: number;
+  reference: string;
   quantite: number;
-  client: Client; // Doit contenir id, nom, email
-}
+  prixUnitaire: number;
+  dateCommande: string; // ISO string reçu du Java
+  product: Product;     // L'objet produit complet
+  user: User;
 
-export interface CommandeCreateDTO {
-  produit: string;
-  quantite: number;
-  clientId: number;
+  // juste ce dont on a besoin pour l'affichage si nécessaire
 }

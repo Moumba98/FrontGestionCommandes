@@ -7,7 +7,10 @@ import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth';
+ // private apiUrl = 'http://localhost:8080/api/auth';
+ //private apiUrl = 'http://backend:8080/api/auth';
+
+ private apiUrl = 'http://15.188.37.53:8080/api/auth';
 
   constructor(private http: HttpClient,private router: Router) {}
 
@@ -15,6 +18,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         // On stocke tout dans le localStorage
+
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role);
         localStorage.setItem('username', response.username);
