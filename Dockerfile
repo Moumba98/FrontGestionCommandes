@@ -1,19 +1,21 @@
-# On utilise l'image légère de Nginx
-FROM nginx:alpine
+# Étape 1 : Construction de l'application
+FROM node:20-alpine AS build
+WORKDIR /app
 
-# On supprime la page par défaut de Nginx
+# On installe les dépendances d'abord 
+COPY package*.json ./
+RUN npm install
+
+# On copie le reste et on build
+COPY . .
+RUN npm run build --configuration=production
+
+# Étape 2 : Serveur Nginx pour héberger les fichiers
+FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
-# On copie les fichiers compilés d'Angular
-# Note: Vérifie bien que le chemin dist/... correspond exactement à ton dossier de build
-
-
-COPY dist/front-end-gestion-client/browser/. /usr/share/nginx/html
-
-
-# --- LA MODIFICATION EST ICI ---
-# On copie ta config personnalisée AVANT de lancer le serveur
-
+# On récupère les fichiers du dossier browser générés à l'étape 1
+COPY --from=build /app/dist/front-end-gestion-client/browser /usr/share/nginx/html
 
 # On expose le port 80
 EXPOSE 80
