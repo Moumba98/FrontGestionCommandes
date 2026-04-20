@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy to AWS') {
             steps {
                 sshagent(['ssh-server-key']) {
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@15.188.37.53 'sudo docker-compose pull frontend && sudo docker-compose up -d frontend'"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@15.188.37.53 'sudo docker compose pull frontend && sudo docker compose up -d frontend'"
                 }
             }
         }
